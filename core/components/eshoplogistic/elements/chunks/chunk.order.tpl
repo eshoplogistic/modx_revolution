@@ -12,7 +12,7 @@
                     </label>
                     <div class="col-md-8">
                         <input type="text" id="{$field}" placeholder="{('ms2_frontend_' ~ $field) | lexicon}"
-                               name="{$field}" value="{$form[$field]}"
+                               name="{$field}" value="{$form[$field] ?: ''}"
                                class="form-control{($field in list $errors) ? ' error' : ''}">
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="col-md-8">
                         <input {if $field == 'city'}autocomplete="off"{/if} type="text" id="{$field}" placeholder="{$plsh}"
                                name="{$field}" 
-                               value="{if $field == 'terminal'}{$order.terminal}{else}{$form[$field]}{/if}"
+                               value="{if $field == 'terminal'}{$order.terminal ?: ''}{else}{$form[$field] ?: ''}{/if}"
                                class="form-control{($field in list $errors) ? ' error' : ''}">
                                
                         {if $field == 'city'}

@@ -205,7 +205,7 @@ class Delivery
 					'article' => $item['id'],
 					'price' => $item['price'],
 					'count' => $item['count'],
-					'weight' => $item['weight'] ?: 1,
+					'weight' => $item['weight'] ?: 0,
 					'dimensions' => $item['dimensions'] ?? ''
 				];
 			}

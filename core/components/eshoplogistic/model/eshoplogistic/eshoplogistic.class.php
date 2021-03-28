@@ -4,7 +4,7 @@ class eShopLogistic
 
     public $modx;
 	public $pdoTools;
-	public $version = '0.0.1';
+	public $version = '0.0.7';
 	
 	public $payments;
 
@@ -208,7 +208,7 @@ class eShopLogistic
 	
 	
 	
-	public function setTarget($fias = '', $city = ''):void 
+	public function setTarget($fias = '', $city = '')
 	{
 		if(!empty($fias)) {
 			$search = [
