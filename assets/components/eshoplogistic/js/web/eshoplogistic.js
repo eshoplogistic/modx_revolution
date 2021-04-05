@@ -445,6 +445,7 @@ window.onload = function() {
 
 
     let modal = {
+        backdrop: null,
         initLayout: {
           createRoot: function (){
               let root = document.createElement('div')
@@ -483,6 +484,7 @@ window.onload = function() {
               buttonClose.setAttribute('data-dismiss','modal')
               buttonClose.setAttribute('aria-label','Close')
               buttonClose.classList.add('close')
+              buttonClose.addEventListener('click', modal.close)
               dom.appendChild(buttonClose)
               return buttonClose;
           },
@@ -512,7 +514,13 @@ window.onload = function() {
               dom.appendChild(col)
               return
           },
-
+            createBackDrop: function (){
+                let backdrop = document.createElement('div')
+                backdrop.classList.add('modal-backdrop','fade')
+                backdrop.setAttribute('style', 'display: none')
+                document.body.appendChild(backdrop)
+                modal.backdrop = backdrop
+            },
         },
         createModalBootstrap: function (){
             if(this.checkOnInit()) return;
@@ -525,6 +533,8 @@ window.onload = function() {
                 body = this.initLayout.createBody(content),
                 row = this.initLayout.createRow(body),
                 colMap = this.initLayout.createColForMap(row);
+
+            this.initLayout.createBackDrop()
         },
         checkOnInit: function (){
             if(document.getElementById(this.idModal)){
@@ -532,11 +542,37 @@ window.onload = function() {
             }
             return false
         },
+
         open: function (){
-            $('#'+ID_MODAL).modal('show')
+            let modalLocal = document.getElementById(ID_MODAL);
+            document.body.classList.add('modal-open')
+            document.body.setAttribute('style','padding-right:17px')
+            modal.backdrop.removeAttribute('style')
+
+            setTimeout(() => {
+                modalLocal.setAttribute('style','display:block;padding-left:17px')
+                setTimeout(() => {
+                    modalLocal.classList.add('show')
+                    modal.backdrop.classList.add('show')
+                },200)
+            },100)
+
         },
         close: function (){
-            $('#'+ID_MODAL).modal('hide')
+            let modalLocal = document.getElementById(ID_MODAL);
+
+            modalLocal.classList.remove('show')
+            setTimeout(() => {
+                modal.backdrop.classList.remove('show')
+                setTimeout(() => {
+                    document.body.classList.remove('modal-open')
+                    document.body.removeAttribute('style')
+                    modal.backdrop.setAttribute('style', 'display: none')
+                    modalLocal.removeAttribute('style')
+                    document.dispatchEvent(new CustomEvent('eshoplogistic.hide.modal'))
+                },200)
+            },100)
+
         },
         destroy: function (){
             if(this.checkOnInit()){
@@ -560,7 +596,7 @@ window.onload = function() {
             let container = document.createElement('div'),
                 modalBody = document.getElementById(ID_MODAL).querySelector('.modal-body  #'+YANDEX_MAP_CONTAINER_ID_FOR_MAP);
             container.setAttribute('id',YANDEX_MAP_CONTAINER_ID)
-            container.setAttribute('style','width: 100%')
+            container.setAttribute('style','width: 100%;height:400px')
             modalBody.appendChild(container)
         },
         initMap: function (event){
@@ -651,8 +687,8 @@ window.onload = function() {
     }
     
     document.addEventListener('click', bindEvents.clickOnTerminals, false);
-    
-    $('#'+ID_MODAL).on('hide.bs.modal', bindEvents.onCloseModal);
+
+    document.addEventListener('eshoplogistic.hide.modal', bindEvents.onCloseModal);
     
     document.addEventListener('onSelectAddress', function (event){
         esl.setAddress(event.detail.address)
