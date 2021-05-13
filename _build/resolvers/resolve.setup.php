@@ -189,10 +189,14 @@ if ($transport->xpdo) {
 						['name' => 'Самовывоз Boxberry', 'properties' => ['service' => 'boxberry', 'mode' => 'terminal'], 'logo' => 'assets/components/eshoplogistic/logos/boxberry.png', 'requires' => 'receiver,phone,email,city'],
 						['name' => 'Курьер Boxberry', 'properties' => ['service' => 'boxberry', 'mode' => 'door'], 'logo' => 'assets/components/eshoplogistic/logos/boxberry.png', 'requires' => 'receiver,phone,email,city,street,building,room'],
 						['name' => 'Почта России', 'properties' => ['service' => 'postrf', 'mode' => 'terminal'], 'logo' => 'assets/components/eshoplogistic/logos/postrf.png', 'requires' => 'receiver,phone,email,index,city'],
-						['name' => 'Самовывоз Своя доставка', 'properties' => ['service' => 'custom', 'mode' => 'door'], 'logo' => '', 'requires' => 'receiver,phone,email,city,street,building,room'],
-						['name' => 'Курьер Своя доставка', 'properties' => ['service' => 'custom', 'mode' => 'terminal'], 'logo' => '', 'requires' => 'receiver,phone,email,city,street,building,room'],
+						['name' => 'Самовывоз Своя доставка', 'properties' => ['service' => 'custom', 'mode' => 'terminal'], 'logo' => '', 'requires' => 'receiver,phone,email,city,street,building,room'],
+						['name' => 'Курьер Своя доставка', 'properties' => ['service' => 'custom', 'mode' => 'door'], 'logo' => '', 'requires' => 'receiver,phone,email,city,street,building,room'],
 						['name' => 'Курьер DPD', 'properties' => ['service' => 'dpd', 'mode' => 'door'], 'logo' => 'assets/components/eshoplogistic/logos/dpd.png', 'requires' => 'receiver,phone,email,city,street,building,room'],
 						['name' => 'Самовывоз DPD', 'properties' => ['service' => 'dpd', 'mode' => 'terminal'], 'logo' => 'assets/components/eshoplogistic/logos/dpd.png', 'requires' => 'receiver,phone,email,city'],
+						['name' => 'Курьер GTD', 'properties' => ['service' => 'gtd', 'mode' => 'door'], 'logo' => 'assets/components/eshoplogistic/logos/gtd.png', 'requires' => 'receiver,phone,email,city,street,building,room'],
+						['name' => 'Самовывоз GTD', 'properties' => ['service' => 'gtd', 'mode' => 'terminal'], 'logo' => 'assets/components/eshoplogistic/logos/gtd.png', 'requires' => 'receiver,phone,email,city'],
+						['name' => 'Курьер Байкал Сервис', 'properties' => ['service' => 'baikal', 'mode' => 'door'], 'logo' => 'assets/components/eshoplogistic/logos/baikal.png', 'requires' => 'receiver,phone,email,city,street,building,room'],
+						['name' => 'Самовывоз Байкал Сервис', 'properties' => ['service' => 'baikal', 'mode' => 'terminal'], 'logo' => 'assets/components/eshoplogistic/logos/baikal.png', 'requires' => 'receiver,phone,email,city'],
 					];
 					
 					foreach ($deliveries as $item) {

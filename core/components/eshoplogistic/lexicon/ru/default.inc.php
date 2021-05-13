@@ -19,3 +19,4 @@ $_lang['eshoplogistic_frontend_service_iml'] = 'ИМЛ';
 $_lang['eshoplogistic_frontend_service_postrf'] = 'Почта России';
 $_lang['eshoplogistic_frontend_service_sdek'] = 'СДЭК';
 $_lang['eshoplogistic_frontend_service_custom'] = 'Наша доставка';
+$_lang['eshoplogistic_frontend_service_baikal'] = 'Байкал Сервис';

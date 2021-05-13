@@ -22,7 +22,9 @@ class eslOrderHandler extends msOrderHandler
 		$cost_ = [];
         if (!empty($this->order['delivery']) && $delivery = $this->modx->getObject('msDelivery', array('id' => $this->order['delivery']))) {
             $cost_ = $delivery->getCost($this, $cost);
-			$cost = $cost_['cost'];
+            if(!empty($cost_['cost'])) {
+                $cost = $cost_['cost'];
+            }
         }
 		
         if (!empty($this->order['payment']) && $payment = $this->modx->getObject('msPayment', array('id' => $this->order['payment']))) {
@@ -73,6 +75,7 @@ class eslOrderHandler extends msOrderHandler
 				'cartCost' => $this->ms2->formatPrice($cart_cost),
 				'deliveryCost' => $delivery_data['price'],
 				'deliveryMode' => $delivery_mode,
+                'deliveryTime' => $delivery_data['time'],
 				'serviceName' => $service_name,
 				'delivery' => $delivery_data
 			]);

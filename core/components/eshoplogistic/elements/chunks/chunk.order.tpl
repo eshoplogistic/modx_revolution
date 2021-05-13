@@ -244,6 +244,7 @@
         <div class="col-md-7">
             <p>В корзине: <span class="esl-cart-cost esl-loader"></span> {'ms2_frontend_currency' | lexicon}</p>
             <p class="esl-total-item">Стоимость доставки: <span class="esl-delivery-cost esl-loader"></span></p>
+			<p class="esl-total-item">Срок доставки: <span class="esl-delivery-time"></span></p>
             <p class="esl-total-item">Способ доставки: <span class="esl-delivery-mode esl-loader"></span></p>
             <p class="esl-total-item">Адрес ПВЗ: <span class="esl-delivery-address"></span></p>
             <p>Итого, к оплате: <span class="esl_cost">{$order.cost ?: 0}</span> {'ms2_frontend_currency' | lexicon}</p>

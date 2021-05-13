@@ -69,10 +69,13 @@ class Delivery
 					}
 				}
 			
-				# уберём примечания
-				/*foreach($terminals as $k => $terminal) {
-					$terminals[$k]['note'] = '';
-				}*/  
+				# очистим примечания
+			    $s = ['"',"'"];
+			    $r = ['',''];
+				foreach($terminals as $k => $terminal) {
+					$terminals[$k]['note'] = str_replace($s, $r, $terminals[$k]['note']);
+					$terminals[$k]['note'] = mb_substr($terminals[$k]['note'], 0, 500);
+				}   
 								
 				return [
 					'target' => $_SESSION['eShopLogistic']['target'],
@@ -81,7 +84,7 @@ class Delivery
 					'mode' => $this->data['mode'],
 					'payment' => $this->data['payment'],
 					'price' => $_SESSION['eShopLogistic'][$hash][$this->data['service']][$this->data['mode']]['price'],
-					'cost' => $cost + $_SESSION['eShopLogistic'][$hash][$this->data['service']][$this->data['mode']]['price'],
+					'cost' => $cost + (int)$_SESSION['eShopLogistic'][$hash][$this->data['service']][$this->data['mode']]['price'],
 					'time' => $_SESSION['eShopLogistic'][$hash][$this->data['service']][$this->data['mode']]['time'] ?? '',
 					'terminals' => $terminals,
 					'note' => $_SESSION['eShopLogistic'][$hash][$this->data['service']][$this->data['mode']]['comment'],

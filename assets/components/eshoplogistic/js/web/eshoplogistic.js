@@ -6,6 +6,7 @@ window.onload = function() {
                 totalCost: 'esl_cost',
                 cartCost: 'esl-cart-cost',
                 deliveryCost: 'esl-delivery-cost',
+                deliveryTime: 'esl-delivery-time',
                 deliveryMode: 'esl-delivery-mode',
                 addressTitle: 'esl-address',
                 fieldTerminal: 'esl-address-field-terminal',
@@ -41,6 +42,11 @@ window.onload = function() {
             }
         },
         msGetCost: function (data) {
+
+            if(!data.serviceName) {
+                let pvz = document.querySelector('.esl-delivery-address')
+                pvz.closest('.esl-total-item').classList.add('hidden');
+            }
             
             for (const [key, value] of Object.entries(this.items.getCostResult)) {
                 
@@ -51,7 +57,7 @@ window.onload = function() {
                     _flclst = _fv.closest('.esl-total-item')
                     
                     if(data[key]) {
-                        
+
                         let crr = '' 
                         if(key == 'deliveryCost') {
                             if(Number(data[key]) > 0) {
@@ -80,10 +86,21 @@ window.onload = function() {
                                     _fv.innerHTML = _fv.dataset[data.delivery.mode]+' '+data.serviceName 
                                 }
                                 break
-                                
+
+                            case 'deliveryTime':
+                                if(!data.serviceName) {
+                                    _flclst.classList.add('hidden');
+                                }
+                                break
+
                             case 'fieldTerminal':
-                                if(data.delivery.mode == 'terminal') { _fv.classList.remove('hidden'); }
-                                else { _fv.classList.add('hidden'); }
+                                if(data.serviceName) {
+                                    if (data.delivery.mode == 'terminal') {
+                                        _fv.classList.remove('hidden');
+                                    } else {
+                                        _fv.classList.add('hidden');
+                                    }
+                                }
                                 break
                                 
                             case 'paymentNote': 
@@ -323,11 +340,10 @@ window.onload = function() {
                 current =  document.querySelector('input[name=delivery]:checked'),
                 ainfo = document.querySelector('.esl-delivery-address')
 
-                  
             if(!address) {
                 
                 terminal.value = ''
-                
+
                 if(ainfo) {
                     ainfo.textContent = ''
                     ainfo.closest('.esl-total-item').classList.add('hidden'); 
@@ -356,9 +372,9 @@ window.onload = function() {
 
                 if(ainfo) {
                     ainfo.textContent = address
-                    ainfo.closest('p').classList.remove('hidden'); 
+                    ainfo.closest('.esl-total-item').classList.remove('hidden');
                 }
-                
+
                 let current_ainfo = current.closest('.esl-block')
                 if(current_ainfo) {
                     current_ainfo.querySelector('.els-terminals a').textContent = 'Изменить пункт самовывоза'
@@ -394,15 +410,13 @@ window.onload = function() {
     miniShop2.Callbacks.add('Cart.remove.response.success', 'eShopLogisticCartRemove', function (response) {
         esl.reload()
     })
-    
 
     miniShop2.Callbacks.add('Order.getcost.response.success', 'eShopLogisticGetCost', function (response) {
         if(typeof response.data.delivery == 'object') {
             esl.msGetCost(response.data)
         }
     })
-    
-    
+
     miniShop2.Callbacks.add('Order.add.response.success', 'eShopLogisticAdd', function (response) {
         if(typeof response.data.delivery == 'string') {
             esl.setAddress()

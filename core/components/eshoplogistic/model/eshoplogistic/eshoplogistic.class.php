@@ -4,7 +4,7 @@ class eShopLogistic
 
     public $modx;
 	public $pdoTools;
-	public $version = '0.0.7';
+	public $version = '0.0.11';
 	
 	public $payments;
 
