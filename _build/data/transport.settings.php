@@ -35,11 +35,6 @@ $tmp = array(
         'xtype' => 'textfield',
         'area' => 'eshoplogistic_main',
     ),
-	'payment_on' => array(
-        'value' => false,
-        'xtype' => 'combo-boolean',
-        'area' => 'eshoplogistic_payment'
-    ),
 	'payment_cash' => array(
         'value' => '1',
         'xtype' => 'textfield',
@@ -51,6 +46,11 @@ $tmp = array(
         'area' => 'eshoplogistic_payment',
     ),
 	'payment_cashless' => array(
+        'value' => '',
+        'xtype' => 'textfield',
+        'area' => 'eshoplogistic_payment',
+    ),
+    'payment_prepay' => array(
         'value' => '',
         'xtype' => 'textfield',
         'area' => 'eshoplogistic_payment',
