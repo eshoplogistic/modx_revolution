@@ -16,7 +16,8 @@ class eShopLogistic
 		$this->payments = [
 			'cash' => explode(',', $this->modx->getOption('eshoplogistic_payment_cash')),
 			'card' => explode(',', $this->modx->getOption('eshoplogistic_payment_card')),
-			'cashless' => explode(',', $this->modx->getOption('eshoplogistic_payment_cashless'))
+			'cashless' => explode(',', $this->modx->getOption('eshoplogistic_payment_cashless')),
+            'prepay' => explode(',', $this->modx->getOption('eshoplogistic_payment_prepay'))
 		];
 
         $corePath = $this->modx->getOption('eshoplogistic_core_path', $config,
